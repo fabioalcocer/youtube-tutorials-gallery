@@ -4,11 +4,12 @@ import { useState } from "react";
 import Form from "./components/Form";
 import ListOfVideos from "./components/ListOfVideos";
 import VideoModal from "./components/VideoModal";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [listOfVideos, setListOfVideos] = useState<string[]>([]);
+  const [listOfVideos, setListOfVideos] = useLocalStorage('videos', []);
   const [openModal, setOpenModal] = useState(false);
   const [modalVideoId, setModalVideoId] = useState("");
 
