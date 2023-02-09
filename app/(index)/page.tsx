@@ -1,9 +1,14 @@
+"use client";
 import { Inter } from "@next/font/google";
+import { useState } from "react";
 import Form from "./components/Form";
+import ListOfVideos from "./components/ListOfVideos";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [listOfVideos, setListOfVideos] = useState<string[]>([]);
+
   return (
     <main className={`${inter.className} min-h-screen bg-[#232946]`}>
       <div className="container mx-auto max-w-5xl p-8">
@@ -12,16 +17,15 @@ export default function Home() {
             <h1 className="headline mb-5 text-6xl font-bold leading-[1.15] text-zinc-100">
               My YouTube Resource Gallery
             </h1>
-            <p className="text-xl leading-8 text-[#c6cdf3] mb-8">
+            <p className="mb-8 text-xl leading-8 text-[#c6cdf3]">
               The perfect app to keep track of valuable resources while learning
               to code. As you come across a helpful video, add the id here.
             </p>
           </div>
-          <Form />
+          <Form setListOfVideos={setListOfVideos} listOfVideos={listOfVideos} />
         </div>
-        <ul id="videosContainer"></ul>
+        <ListOfVideos listOfVideos={listOfVideos} />
       </div>
-      {/* <VideoModal /> */}
     </main>
   );
 }

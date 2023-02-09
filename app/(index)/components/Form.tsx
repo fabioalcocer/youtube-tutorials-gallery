@@ -1,12 +1,17 @@
 'use client'
 import { FormEvent, ChangeEvent, useState } from "react";
 
-function Form() {
+type Props = {
+  setListOfVideos: ([]) => any,
+  listOfVideos: string[]
+}
+
+function Form({setListOfVideos, listOfVideos} : Props) {
   const [videoId, setVideoId] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(videoId)
+    setListOfVideos([...listOfVideos, videoId])
 
     setVideoId("")
   };
@@ -16,7 +21,7 @@ function Form() {
   }
 
   return (
-    <form onClick={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <label
         htmlFor="videoId"
         className="mb-2 block text-2xl font-medium leading-8 text-teal-400"
