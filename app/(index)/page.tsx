@@ -3,11 +3,14 @@ import { Inter } from "@next/font/google";
 import { useState } from "react";
 import Form from "./components/Form";
 import ListOfVideos from "./components/ListOfVideos";
+import VideoModal from "./components/VideoModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [listOfVideos, setListOfVideos] = useState<string[]>([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalVideoId, setModalVideoId] = useState("");
 
   return (
     <main className={`${inter.className} min-h-screen bg-[#232946]`}>
@@ -24,8 +27,16 @@ export default function Home() {
           </div>
           <Form setListOfVideos={setListOfVideos} listOfVideos={listOfVideos} />
         </div>
-        <ListOfVideos listOfVideos={listOfVideos} />
+        <ListOfVideos
+          setListOfVideos={setListOfVideos}
+          listOfVideos={listOfVideos}
+          setModalVideoId={setModalVideoId}
+          setOpenModal={setOpenModal}
+        />
       </div>
+      {openModal && (
+        <VideoModal modalVideoId={modalVideoId} setOpenModal={setOpenModal} />
+      )}
     </main>
   );
 }
